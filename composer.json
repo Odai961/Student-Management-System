@@ -1,0 +1,18 @@
+{
+    "name": "odai/student-management-system",
+    "authors": [
+        {
+            "name": "Odai Kinaan",
+            "email": "odaikenaan9631@gmail.com"
+        }
+    ],
+
+    "require": {
+    },
+
+    "autoload": {
+        "psr-4": {
+            "Core\\": "Core/"
+        }
+    }
+}
