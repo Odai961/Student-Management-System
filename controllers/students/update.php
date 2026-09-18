@@ -64,7 +64,7 @@ if ($student_exist) {
 
 }
 
-$currentStudent = $db->query('select * from students where id =:id', [
+$db->query('select * from students where id =:id', [
     'id' => $student['id']
 ])->findOrFail();
 

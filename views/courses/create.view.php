@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Update Student</title>
+    <title>Add Course</title>
 
     <style>
         * {
@@ -105,27 +105,32 @@
             opacity: .9;
         }
 
-        .delete-form {
-            display: flex;
-            justify-content: flex-end;
-            margin-top: 12px;
-        }
 
-        .delete-btn {
-            padding: 12px 20px;
-            color: #dc2626;
-            background-color: #e5e7eb;
-            border: none;
+        .textarea-input {
+            width: 100%;
+            min-height: 120px;
+            padding: 12px 14px;
+            border: 1px solid #d1d5db;
             border-radius: 8px;
-            font-weight: 600;
+            background-color: #fff;
+            font-family: inherit;
             font-size: 14px;
-            cursor: pointer;
-            transition: all 0.2s ease;
+            line-height: 1.5;
+            resize: vertical;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
         }
 
-        .delete-btn:hover {
-            background-color: #fee2e2;
+        .textarea-input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
         }
+
+        .textarea-input::placeholder {
+            color: #9ca3af;
+        }
+
 
         .error {
             margin-top: 6px;
@@ -156,51 +161,45 @@
 <div class="container">
 
     <div class="header">
-        <h1>Edit Student</h1>
-        <p>modify information about the student.</p>
+        <h1>Add New Course</h1>
+        <p>Add a new Course to the management system.</p>
     </div>
 
     <div class="card">
 
-        <form method="POST" action="/students">
-
-            <input type="hidden" name="_method" value="PATCH">
-            <input type="hidden" name="id" value="<?= (int)$student['id'] ?>">
+        <form method="POST" action="/courses">
 
             <div class="form-row">
 
                 <div class="form-group">
-                    <label for="first_name">First Name</label>
-
+                    <label for="title">Title</label>
                     <input
                             type="text"
-                            id="first_name"
-                            name="first_name"
-                            value="<?= htmlspecialchars($student['first_name'] ?? '') ?>"
-                            placeholder="Enter first name"
+                            id="title"
+                            name="title"
+                            value="<?= htmlspecialchars($_POST['title'] ?? '') ?>"
+                            placeholder="Enter title"
                     >
-
-                    <?php if (isset($errors['first_name'])): ?>
+                    <?php if (isset($errors['title'])): ?>
                         <p class="error">
-                            <?= htmlspecialchars($errors['first_name']) ?>
+                            <?= htmlspecialchars($errors['title']) ?>
                         </p>
                     <?php endif; ?>
                 </div>
 
                 <div class="form-group">
-                    <label for="last_name">Last Name</label>
-
+                    <label for="price">Price</label>
                     <input
                             type="text"
-                            id="last_name"
-                            name="last_name"
-                            value="<?= htmlspecialchars($student['last_name'] ?? '') ?>"
-                            placeholder="Enter last name"
+                            id="price"
+                            name="price"
+                            value="<?= htmlspecialchars($_POST['price'] ?? '') ?>"
+                            placeholder="Enter price"
                     >
 
-                    <?php if (isset($errors['last_name'])): ?>
+                    <?php if (isset($errors['price'])): ?>
                         <p class="error">
-                            <?= htmlspecialchars($errors['last_name']) ?>
+                            <?= htmlspecialchars($errors['price']) ?>
                         </p>
                     <?php endif; ?>
                 </div>
@@ -210,36 +209,34 @@
             <div class="form-row">
 
                 <div class="form-group">
-                    <label for="birth_date">Birth Date</label>
-
+                    <label for="chapters">Chapters</label>
                     <input
-                            type="date"
-                            id="birth_date"
-                            name="birth_date"
-                            value="<?= htmlspecialchars($student['birth_date'] ?? '') ?>"
+                            type="number"
+                            id="chapters"
+                            value="<?= htmlspecialchars($_POST['chapters'] ?? '') ?>"
+                            name="chapters"
+                            placeholder="Enter number of chapters   "
                     >
 
-                    <?php if (isset($errors['birth_date'])): ?>
+                    <?php if (isset($errors['chapters'])): ?>
                         <p class="error">
-                            <?= htmlspecialchars($errors['birth_date']) ?>
+                            <?= htmlspecialchars($errors['chapters']) ?>
                         </p>
                     <?php endif; ?>
                 </div>
 
                 <div class="form-group">
-                    <label for="email">Email</label>
-
+                    <label for="start_date">Start Date</label>
                     <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            value="<?= htmlspecialchars($student['email'] ?? '') ?>"
-                            placeholder="student@example.com"
+                            type="date"
+                            id="start_date"
+                            name="start_date"
+                            value="<?= htmlspecialchars($_POST['start_date'] ?? '') ?>"
                     >
 
-                    <?php if (isset($errors['email'])): ?>
+                    <?php if (isset($errors['start_date'])): ?>
                         <p class="error">
-                            <?= htmlspecialchars($errors['email']) ?>
+                            <?= htmlspecialchars($errors['start_date']) ?>
                         </p>
                     <?php endif; ?>
                 </div>
@@ -247,44 +244,34 @@
             </div>
 
             <div class="form-group">
-                <label for="password">Password</label>
+                <label for="description">Description</label>
 
-                <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        placeholder="Enter password"
-                >
+                <textarea
+                        id="description"
+                        name="description"
+                        class="textarea-input"
+                        placeholder="Enter course description"
+                ><?= htmlspecialchars($_POST['description'] ?? $course['description'] ?? '') ?></textarea>
 
-                <?php if (isset($errors['password'])): ?>
+
+                <?php if (isset($errors['description'])): ?>
                     <p class="error">
-                        <?= htmlspecialchars($errors['password']) ?>
+                        <?= htmlspecialchars($errors['description']) ?>
                     </p>
                 <?php endif; ?>
             </div>
 
             <div class="actions">
 
-                <a href="/students" class="btn btn-secondary">
+                <a href="/courses" class="btn btn-secondary">
                     Cancel
                 </a>
 
                 <button type="submit" class="btn btn-primary">
-                    Update Student
+                    Create Course
                 </button>
 
             </div>
-
-        </form>
-
-        <form class="delete-form" method="POST" action="/students">
-
-            <input type="hidden" name="_method" value="DELETE">
-            <input type="hidden" name="id" value="<?= (int)$student['id'] ?>">
-
-            <button type="submit" class="delete-btn">
-                Delete
-            </button>
 
         </form>
 

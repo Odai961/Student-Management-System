@@ -9,14 +9,14 @@ if (!$id || !is_numeric($id)) {
     abort(404);
 }
 
-$db= App::resolve(Database::class);
+$db = App::resolve(Database::class);
 
-$student=$db->query('select * from students where id=:id',[
-    'id'=>$id
+$student = $db->query('select * from students where id=:id', [
+    'id' => $id
 ])->findOrFail();
 
-view('students/edit.view.php',[
-    'student'=>$student
+view('students/edit.view.php', [
+    'student' => $student
 ]);
 
 

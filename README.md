@@ -5,6 +5,7 @@ A student management system built with PHP and MySQL.
 ## Current Features
 
 - Student CRUD
+- Courses CRUD
 - PHP OOP
 - PDO + MySQL
 - Composer / PSR-4

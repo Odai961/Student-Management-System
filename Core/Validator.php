@@ -12,6 +12,11 @@ class Validator
         return strlen($string) >= $min && strlen($string) <= $max;
     }
 
+    public static function number($value,$min=0,$max=INF)
+    {
+        return is_numeric($value) && $value>=$min && $value<=$max ;
+    }
+
     public static function email($value)
     {
         return filter_var($value, FILTER_VALIDATE_EMAIL);
@@ -29,5 +34,19 @@ class Validator
         return $timestamp !== false
             && $timestamp <= time();
     }
+
+    public static function futureDate($date)
+    {
+
+        if (!$date) {
+            return false;
+        }
+
+        $timestamp = strtotime($date);
+
+        return $timestamp !== false
+            && $timestamp >= time();
+    }
+
 
 }
