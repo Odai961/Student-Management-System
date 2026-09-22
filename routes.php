@@ -24,3 +24,6 @@ $router->get('/courses/show','courses/show.php');
 $router->get('/courses/edit','courses/edit.php');
 $router->patch('/courses','courses/update.php');
 $router->delete('/courses','courses/destroy.php');
+//register
+$router->get('/register','auth/register/create.php');
+$router->post('/register','auth/register/store.php');
